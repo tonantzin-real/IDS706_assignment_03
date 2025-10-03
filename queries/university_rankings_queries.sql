@@ -52,10 +52,10 @@ LIMIT 15;
 -- Perform the CRUD operations below. 
 
 -- CREATE
-SELECT * FROM university_rankings ur WHERE institution = 'Duke Tech';
-INSERT INTO university_rankings (institution, country, world_rank,  score) VALUES 
-('Duke Tech', 'USA', 350, 60.5);
-SELECT * FROM university_rankings ur WHERE institution = 'Duke Tech';
+SELECT * FROM university_rankings ur WHERE institution = 'Duke Tech' AND year = 2014;
+INSERT INTO university_rankings (institution, country, world_rank,  score, year) VALUES 
+('Duke Tech', 'USA', 350, 60.5, 2014);
+SELECT * FROM university_rankings ur WHERE institution = 'Duke Tech' AND year = 2014;
 
 -- READ
 --SELECT YEAR, COUNT(*) AS N FROM university_rankings ur group by YEAR
@@ -90,11 +90,14 @@ WHERE institution = 'University of Oxford'
 -- DELETE
 SELECT *
 FROM university_rankings
-WHERE score < 45;
+WHERE score < 45
+	AND year = 2015;
 
 DELETE FROM university_rankings
-WHERE score < 45;
+WHERE score < 45
+	AND year = 2015;
 
 SELECT *
 FROM university_rankings
-WHERE score < 45;
+WHERE score < 45
+	AND year = 2015;
