@@ -19,12 +19,9 @@ SELECT country,
 	MAX(score) AS max_score,
 	MIN(world_rank) AS min_world_rank,
 	MAX(world_rank) AS max_world_rank,
-	MIN(publications) AS min_publications,
-	MAX(publications) AS max_publications,
-	MIN(citations) AS min_citations,
-	MAX(citations) AS max_citations,
-	MIN(patents) AS min_patents,
-	MAX(patents) AS max_patents
+	COUNT(publications) AS n_publications,
+	COUNT(citations) AS n_citations,
+	COUNT(patents) AS n_patents
 FROM university_rankings ur
 GROUP BY country
 ORDER BY max_score DESC
@@ -38,14 +35,14 @@ SELECT DISTINCT country, institution,
 	AVG(national_rank) OVER (PARTITION BY institution) AS avg_national_rank,
 	AVG(alumni_employment) OVER (PARTITION BY institution) AS avg_alumni_employment,
 	AVG(quality_of_faculty) OVER (PARTITION BY institution) AS avg_quality_of_faculty,
-	MAX(publications) OVER (PARTITION BY institution) AS max_publications,
+	MIN(publications) OVER (PARTITION BY institution) AS min_publications,
 	MAX(publications) OVER (PARTITION BY institution) AS max_publications,
 	MIN(citations) OVER (PARTITION BY institution) AS min_citations,
-	MIN(citations) OVER (PARTITION BY institution) AS min_citations
+	MAX(citations) OVER (PARTITION BY institution) AS max_citations
 FROM university_rankings ur
 WHERE country IN ('USA', 'United Kingdom') 
 ORDER BY score DESC
-LIMIT 15;
+LIMIT 10;
 
 
 -- 2. CRUD Operations
